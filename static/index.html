@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order & Inventory Management</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📦 Order & Inventory</h1>
+            <div id="nav-links">
+                <!-- Dynamic nav links -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container main-content">
+        <!-- Login/Register Section -->
+        <div id="auth-section" class="section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showLogin()">Login</button>
+                    <button class="auth-tab" onclick="showRegister()">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login-form" class="auth-form">
+                    <h2>Login</h2>
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button onclick="login()">Login</button>
+                    <div id="login-error" class="error"></div>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="auth-form" style="display:none;">
+                    <h2>Register</h2>
+                    <input type="email" id="register-email" placeholder="Email" required>
+                    <input type="password" id="register-password" placeholder="Password" required>
+                    <select id="register-role">
+                        <option value="customer">Customer</option>
+                        <option value="admin">Admin</option>
+                        <option value="warehouse_manager">Warehouse Manager</option>
+                    </select>
+                    <button onclick="register()">Register</button>
+                    <div id="register-error" class="error"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div id="products-section" class="section" style="display:none;">
+            <h2>Products</h2>
+            <div id="products-grid" class="products-grid">
+                <!-- Products loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Cart Section -->
+        <div id="cart-section" class="section" style="display:none;">
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cart-total">0.00</span></h3>
+                <button onclick="placeOrder()" class="btn-primary">Place Order</button>
+            </div>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="orders-section" class="section" style="display:none;">
+            <h2>My Orders</h2>
+            <div id="orders-list"></div>
+        </div>
+
+        <!-- Admin Dashboard Section -->
+        <div id="admin-section" class="section" style="display:none;">
+            <h2>📊 Admin Dashboard</h2>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Revenue</h3>
+                    <p class="stat-value" id="stat-revenue">$0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Orders</h3>
+                    <p class="stat-value" id="stat-orders">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Products Sold</h3>
+                    <p class="stat-value" id="stat-products">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Orders</h3>
+                    <p class="stat-value" id="stat-pending">0</p>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Top Selling Products</h3>
+                    <canvas id="topSellingChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Revenue Over Time (Last 30 Days)</h3>
+                    <canvas id="revenueTimeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Revenue by Product Table -->
+            <div class="table-container">
+                <h3>Revenue by Product</h3>
+                <table id="revenue-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Units Sold</th>
+                            <th>Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="revenue-table-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Product Management -->
+            <div class="admin-actions">
+                <h3>Manage Products</h3>
+                <button onclick="showCreateProduct()" class="btn-primary">+ Create Product</button>
+                <div id="all-products-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
